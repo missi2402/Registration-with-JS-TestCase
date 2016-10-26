@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>TestCase CodeIT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Antoniuk">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="img/favicon.ico">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body id="particles-js">
+    <header>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h2>Registration</h2>
+                    <form id="register">
+                        <input type="text" name="name" value="Mark" required placeholder="First name">
+                        <input type="text" name="secondname" value="bla" required placeholder="Last name">
+                        <input type="email" name="email" value="missi2402@mail.ru" required placeholder="Email">
+                        <select name="Gender" required="">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                        <input type="password" name="pass" value="1234" required placeholder="Password">
+                        <button type="submit">Done</button>
+                    </form>
+                    <div id="content"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>Test task Antoniuk. Kharkov 2016 for CodeIT.</footer>
+    <script>
+    window.onload = function() {
+        /*$("#form1").submit(function(event) {
+            $.getJSON('http://codeit.pro/frontTestTask/user/registration', function(data) {
+                $.each(data, function(key, val) {
+                    $('#content').append(key + '<br>' + val + '<br>');
+                });
+            });
+            event.preventDefault();
+        });*/
+        /*$("#form1").bind('ajax:complete', function(event) {
+        	$.getJSON('http://codeit.pro/frontTestTask/user/registration', function(data) {
+                $.each(data, function(key, val) {
+                    $('#content').append(key + '<br>' + val + '<br>');
+                });
+            });
+            event.preventDefault();
+       });*/
+        $("#form1").submit(function(event) {
+            $.ajax({
+                type: "POST",
+                url: "http://codeit.pro/frontTestTask/user/registration",
+                data: $(this).serialize(),
+                success: function(data) {
+                    $.each(data, function(key, val) {
+                        $('#content').append(key + '<br>' + val + '<br>');
+                    });
+                    alert("suck");
+                }
+            })
+            event.preventDefault();
+        });
+    }
+    </script>
+    <!--Scripts for Bootstrap 4-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!--Scripts for cross-->
+    <script src="js/prefixfree.min.js"></script>
+    <!--Scripts for background-->
+    <script src="js/particles.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

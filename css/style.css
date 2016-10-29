@@ -1,20 +1,22 @@
 body {
     background-color: #000 !important;
     text-align: center;
-    overflow: hidden;
 }
 
 main {
     position: absolute;
-    left: 8%;
+    width: 100%;
 }
 
 main h2 {
     color: #eee;
     margin-top: 15%;
-    margin-bottom: 5%;
 }
-
+.alert-danger {
+    border-radius: 0 !important;
+    width: 80%;
+    margin-left: 10%;
+}
 #register input,
 #register select,
 #register option {
@@ -49,10 +51,19 @@ main h2 {
     background: #fff;
     color: #000;
 }
-
+.checkedLi {
+	color: red;
+}
 footer {
     position: absolute;
     bottom: 10px;
     right: 10px;
     color: #fff;
+}
+
+.morecontent span {
+    display: none;
+}
+.morelink {
+    display: block;
 }

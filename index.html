@@ -12,58 +12,48 @@
 </head>
 
 <body id="particles-js">
-    <header>
-    </header>
     <main>
         <div class="container">
             <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                     <h2>Registration</h2>
+                    <div class="alert alert-danger alert-dismissible fades" role="alert" style="visibility: hidden">
+                    </div>
                     <form id="register">
                         <input type="text" name="name" value="Mark" required placeholder="First name">
                         <input type="text" name="secondname" value="bla" required placeholder="Last name">
                         <input type="email" name="email" value="missi2402@mail.ru" required placeholder="Email">
-                        <select name="Gender" required="">
+                        <select name="gender" required>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
-                        <input type="password" name="pass" value="1234" required placeholder="Password">
+                        <input type="password" name="pass" value="1234" placeholder="Password" required>
                         <button type="submit">Done</button>
                     </form>
-                    <div id="content"></div>
                 </div>
             </div>
         </div>
     </main>
     <footer>Test task Antoniuk. Kharkov 2016 for CodeIT.</footer>
     <script>
+    var messageServer = {};
     window.onload = function() {
-        /*$("#form1").submit(function(event) {
-            $.getJSON('http://codeit.pro/frontTestTask/user/registration', function(data) {
-                $.each(data, function(key, val) {
-                    $('#content').append(key + '<br>' + val + '<br>');
-                });
-            });
-            event.preventDefault();
-        });*/
-        /*$("#form1").bind('ajax:complete', function(event) {
-        	$.getJSON('http://codeit.pro/frontTestTask/user/registration', function(data) {
-                $.each(data, function(key, val) {
-                    $('#content').append(key + '<br>' + val + '<br>');
-                });
-            });
-            event.preventDefault();
-       });*/
-        $("#form1").submit(function(event) {
+        $("#register").submit(function(event) {
             $.ajax({
                 type: "POST",
                 url: "http://codeit.pro/frontTestTask/user/registration",
                 data: $(this).serialize(),
                 success: function(data) {
+                    if (data.status === 'Error' || data.status === 'Form Error') {
+                        $('.alert').html("<strong>Holy guacamole! </strong>" + data.message);
+                        $('.alert').css('visibility', 'visible');
+                    } else {
+                    	window.location.replace("company.html");
+                    }
                     $.each(data, function(key, val) {
-                        $('#content').append(key + '<br>' + val + '<br>');
+                        messageServer.key = val;
+                        $('#content').append(key + '<br>' + messageServer.key + '<br>');
                     });
-                    alert("suck");
                 }
             })
             event.preventDefault();

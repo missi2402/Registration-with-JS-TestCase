@@ -8,6 +8,8 @@ var arrayForDrawColumn = [];
 var firstSlide = true;
 var Changer;
 window.onload = function() {
+    $("#status").fadeIn();
+    $("#preloader").fadeIn();
     $.ajax({
         type: "POST",
         url: "http://codeit.pro/frontTestTask/company/getList",
@@ -36,9 +38,7 @@ window.onload = function() {
                 arrayForDrawPie.push([name, p]);;
             });
         }
-    }).done(function() {
-        $(this).addClass("done");
-    });
+    })
     $.ajax({
         type: "POST",
         url: "http://codeit.pro/frontTestTask/news/getList",
@@ -57,6 +57,8 @@ window.onload = function() {
             $('.carousel-inner').append('<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next"><span class="icon-next" aria-hidden="true"></span></a>');
         }
     })
+    $("#status").fadeOut();
+    $("#preloader").fadeOut();
     event.preventDefault();
     $(".listOfCompanies").on("click", "li", function() {
         listOfPartners = {};
@@ -82,7 +84,6 @@ window.onload = function() {
             var p = listOfPartners[name];
             arrayForDrawColumn.push([name, p]);
         });
-        console.log(arrayForDrawColumn);
         google.charts.setOnLoadCallback(drawChart2);
         $('.companyPartners').css('display', 'block');
     });
@@ -90,19 +91,15 @@ window.onload = function() {
         var item = $(this).val();
         if (item === "alpha") {
             listOfPartners = sortObject(listOfPartners, 'nameSB');
-            console.log(1);
         }
         if (item === "against") {
             listOfPartners = sortObject(listOfPartners, 'nameBS');
-            console.log(2);
         }
         if (item === "desc") {
             listOfPartners = sortObject(listOfPartners, 'valueBS');
-            console.log(3);
         }
         if (item === "asce") {
             listOfPartners = sortObject(listOfPartners, 'valueSB');
-            console.log(4);
         }
         // Array for column chart (draw.js google)
         arrayForDrawColumn = []
@@ -111,8 +108,10 @@ window.onload = function() {
             var p = listOfPartners[name];
             arrayForDrawColumn.push([name, p]);
         });
-        console.log(arrayForDrawColumn);
         google.charts.setOnLoadCallback(drawChart2);
+    });
+    $(".News").on("click", "div.description", function() {
+        $('div.description').css('overflow', 'auto');
     });
 }
 
@@ -169,6 +168,22 @@ function sortObject(obj, type) {
     console.log(output);
     return output;
 }
-$(window).resize(function() {
-    $("body").prepend("<div>" + $(window).width() + "</div>");
-});
+
+function getListCompanyByLocation(nameFromList) {
+    document.getElementById("ulCompanyByLocation").innerHTML = "";
+    document.getElementById("piechart").style.display="none";
+    $.each(objectCompany.list, function(key, val) {
+                var nameCompany = objectCompany.list[key].location.name;
+                if (nameCompany == nameFromList) {        
+                    $('#ulCompanyByLocation').append('<li>' + objectCompany.list[key].name + '</li>');
+                }
+            });
+    document.getElementById("listCompanyByLocation").style.display="block";
+    document.getElementById("back").style.display="inline-block";
+}
+
+function back() {
+    document.getElementById("piechart").style.display="block";
+    document.getElementById("listCompanyByLocation").style.display="none";
+    document.getElementById("back").style.display="none";
+}

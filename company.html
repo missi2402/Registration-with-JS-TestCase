@@ -34,26 +34,26 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 companyPartners" style="display: none;">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 companyPartners" style="visibility: hidden; height: 0px">
                     <h3 class="blockHeader">Company partners</h3>
                     <div class="companyPartnersContent">
                         <select class="sort">
-                            <option value="">Sort by name</option>
-                            <option value="alpha">Alphabetically</option>
-                            <option value="against">Against the alphabet</option>
+                            <option>Sort by name</option>
+                            <option data-sort="nameSB">Alphabetically</option>
+                            <option data-sort="nameBS">Against the alphabet</option>
                         </select>
                         <select class="sort">
-                            <option value="">Sort by value</option>
-                            <option value="desc">Descending</option>
-                            <option value="asce">Ascending</option>
+                            <option>Sort by value</option>
+                            <option data-sort="valueBS">Descending</option>
+                            <option data-sort="valueSB">Ascending</option>
                         </select>
-                        <div id="columnchart" style="width: 100%; height: 100%;"></div>
+                        <div id="columnchart" style="width: 100%; height: 330px;"></div>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 companiesByLocation">
                     <h3 class="blockHeader">Companies by location</h3>
                     <div class="companiesByLocationContent">
-                        <div id="piechart" style="width: 100%; height: 100%;"></div>
+                        <div id="piechart" style="width: 100%; height: 330px;"></div>
                         <span id="back" style="display:none;" onclick="back();"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</span>
                         <div id="listCompanyByLocation" style="display: none">
                             <ul id="ulCompanyByLocation"></ul>

@@ -20,14 +20,14 @@
                     <div class="alert alert-success alert-dismissible fades" role="alert" style="display: none"></div>
                     <div class="alert alert-danger alert-dismissible fades" role="alert" style="visibility: hidden"></div>
                     <form id="register">
-                        <input type="text" name="name" value="Jon" required placeholder="First name">
-                        <input type="text" name="secondname" value="Snow" required placeholder="Last name">
-                        <input type="email" name="email" value="winter.is.comming@mail.ru" required placeholder="Email">
-                        <select name="gender" required>
+                        <input class="validation" type="text" name="name" value="Jon" placeholder="First name" data-error="First name is mandatiry field">
+                        <input class="validation" type="text" name="secondname" value="Snow" placeholder="Last name" data-error="Last name is mandatiry field">
+                        <input class="validation" type="email" name="email" value="winter.is.comming@mail.ru" placeholder="Email" data-error="Email is mandatiry field">
+                        <select class="validation" name="gender">
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
-                        <input type="password" name="pass" value="ygritte" placeholder="Password" required>
+                        <input class="validation" type="password" name="pass" value="ygritte" placeholder="Password" data-error="Password is mandatiry field">
                         <button type="submit">Done</button>
                     </form>
                 </div>

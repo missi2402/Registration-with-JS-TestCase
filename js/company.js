@@ -18,12 +18,10 @@ window.onload = function() {
             objectCompany = data;
             // Total Companies
             $('.totalCompaniesContent').html('<div>' + objectCompany.list.length + '</div>');
-            // List of companies
             $.each(objectCompany.list, function(key, val) {
-                $('#findLi').append('<li>' + objectCompany.list[key].name + '</li>')
-            });
-            // List of countries
-            $.each(objectCompany.list, function(key, val) {
+                // List of companies
+                $('#findLi').append('<li>' + objectCompany.list[key].name + '</li>');
+                // List of countries
                 var name = objectCompany.list[key].location.name;
                 if (name in listOfCoutries) {
                     listOfCoutries[name]++;
@@ -57,7 +55,6 @@ window.onload = function() {
             $('.carousel-inner').append('<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next"><span class="icon-next" aria-hidden="true"></span></a>');
         }
     })
-    $("#status").fadeOut();
     $("#preloader").fadeOut();
     event.preventDefault();
     $(".listOfCompanies").on("click", "li", function() {
@@ -85,22 +82,12 @@ window.onload = function() {
             arrayForDrawColumn.push([name, p]);
         });
         google.charts.setOnLoadCallback(drawChart2);
-        $('.companyPartners').css('display', 'block');
+        $('.companyPartners').css('visibility', 'visible');
+        $('.companyPartners').css('height', '400px');
     });
     $('.sort').change(function() {
-        var item = $(this).val();
-        if (item === "alpha") {
-            listOfPartners = sortObject(listOfPartners, 'nameSB');
-        }
-        if (item === "against") {
-            listOfPartners = sortObject(listOfPartners, 'nameBS');
-        }
-        if (item === "desc") {
-            listOfPartners = sortObject(listOfPartners, 'valueBS');
-        }
-        if (item === "asce") {
-            listOfPartners = sortObject(listOfPartners, 'valueSB');
-        }
+        var typeSort = $(this).data("sort");
+        listOfPartners = sortObject(listOfPartners, typeSort);
         // Array for column chart (draw.js google)
         arrayForDrawColumn = []
         arrayForDrawColumn.push(['Company', 'Percentage']);

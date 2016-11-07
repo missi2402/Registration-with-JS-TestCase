@@ -1,6 +1,16 @@
 var messageServer = {};
 window.onload = function() {
     $("#register").submit(function(event) {
+        event.preventDefault();
+        var error = 0;
+        $(".validation").each(function() {
+            if ($(this).val() == '' || $(this).val() == null) {
+                $('.alert-danger').html("<strong>Holy bolly! </strong>" + $(this).data("error"))
+                    .css('visibility', 'visible');
+                error++;
+            }
+        });
+        if (error != 0) return false;
         $.ajax({
             type: "POST",
             url: "http://codeit.pro/frontTestTask/user/registration",
@@ -20,8 +30,8 @@ window.onload = function() {
                     $('#content').append(key + '<br>' + messageServer.key + '<br>');
                 });
             }
-        })
-        event.preventDefault();
+        });
+        e.preventDefault();
     });
 }
 
